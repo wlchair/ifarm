@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: '1.0'
   title: "iFarm"
-  description: 农场管理接口信息
+  description: ifrarm接口
     
 host: polls.apiblueprint.org
 basePath: /
@@ -15,128 +15,44 @@ produces:
 paths:
   /mating:
     x-summary: 配种信息
-    post:
-      summary: 新增配种
+    get:
+      summary: 每日任务列表
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: '#/definitions/Mating'
+            $ref: '#/definitions/Req-task'
+            
       responses:
-        '200':
-          description: 保存成功
-  /brith:
-    x-summary: 分娩信息
-    post: 
-      summary: 新增分娩
-      parameters:
-        - name: body
-          in: body
-          required: true
+        200:
+          description: "成功返回数据"
           schema:
-            $ref: '#/definitions/Brith'
-      responses:
-        200: 
-          description: 保存成功
+            type: "array"
+            items:
+              $ref: "#/definitions/Res-task"
 definitions:
-  Mating:
+  Req-task:
     properties:
       date:
         type: string
-        description: 配种日期
-      executor-id:
-        type: number
-        description: 技术员
-      swine-id:
-        type: string
-        description: 母猪ID
-      swine-lead-id:
-        type: string
-        description: 主公猪
-      boars:
-        type: array
-        description: 公猪信息
-        items:
-          type: object
-          properties:
-            mating-mode:
-              type: number
-              description: 配种方式
-            swine-id:
-              type: string
-              description: 公猪耳号
-            time:
-              type: number
-              description: 配种次数
+        description: 任务时间戳
     required:
       - date
-      - executor-id
-  Brith:
+  Res-task:
     properties:
-      date: 
+      name: 
+        type: string  
+        description: 动作名称
+      type: 
         type: string
-        description: 日期
+        description: 动作所对应的类型, 用于用户设置跳转的路径. 0配种, 1分娩, 2断奶
       swine-id: 
         type: string
         description: 母猪耳号
-      brith-pig: 
+      location:
+        type: string
+        description: 猪所在栏舍
+      status:
         type: number
-        description: 出生
-      health-pig:
-        type: number
-        description: 健仔
-      dead-pig:
-        type: number
-        description: 死亡
-      deformity-pig:
-        type: number
-        description: 畸形
-      mummy-pig:
-        type: number
-        description: 木乃伊
-      weak-pig:
-        type: number
-        description: 弱仔
-      crush-pig:
-        type: number
-        description: 压死
-      swine-num: 
-        type: number
-        description: 母猪数量
-      boar-num:
-        type: number
-        description: 公猪数量
-      total-weight: 
-        type: number
-        description: 总重
-      average-weight: 
-        type: number
-        description: 均重
-      varieties: 
-        type: number
-        description: 品种
-      boar-mode:
-        type: number
-        description: 公猪耳号（奇数，偶数）
-      boar-start:
-        type: number
-        description: 开始号码
-      boar-over:
-        type: number
-        description: 结束号码
-      boar-weight:
-        type: number
-        description: 公猪窝重量
-      swine-mode:
-        type: number
-        description: 母猪耳号（奇数，偶数）
-      swine-start:
-        type: number
-        description: 开始号码
-      swine-over:
-        type: number
-        description: 结束号码
-      swine-weight:
-        type: number
-        description: 母猪窝重量
+        description: 任务状态, 0正常, 1延迟、
