@@ -1,8 +1,7 @@
 swagger: '2.0'
 info:
   version: '1.0'
-  title: "iFarm"
-  description: ifrarm接口
+  title: "iFarm文档(日程)"
     
 host: polls.apiblueprint.org
 basePath: /
@@ -13,7 +12,7 @@ consumes:
 produces:
 - application/json
 paths:
-  /mating:
+  /task-day:
     x-summary: 配种信息
     get:
       summary: 每日任务列表
