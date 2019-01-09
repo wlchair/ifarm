@@ -3,7 +3,7 @@ info:
   version: '1.0'
   title: "iFarm文档(日程)"
     
-host: polls.apiblueprint.org
+host: 47.94.160.173:10000
 basePath: /
 schemes:
 - http
